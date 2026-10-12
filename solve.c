@@ -22,7 +22,8 @@ int channel_of(int s) {
 }
 
 int main() {
-    FILE *f = fopen("detections.csv", "r");
+    FILE *f = fopen("data/detections.csv", "r");
+    if (!f) f = fopen("detections.csv", "r");
     if (!f) {
         printf("Failed to open detections.csv\n");
         return 1;
