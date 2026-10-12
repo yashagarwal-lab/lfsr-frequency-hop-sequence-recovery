@@ -46,7 +46,7 @@ $$f_k = (s_k \gg 19) \oplus (s_k \gg 16) \pmod 2$$
 
 The state transition update function $\mathcal{T}(s_k)$ shifts the register left by 1 bit and inserts $f_k$ into the least significant bit (masked to 20 bits):
 
-$$s_{k+1} = \mathcal{T}(s_k) = \left((s_k \ll 1) \mid f_k\right) \mathbin{\&} \text{0xFFFFF}$$
+$$s_{k+1} = \mathcal{T}(s_k) = \left((s_k \ll 1) \mid f_k\right) \wedge \text{0xFFFFF}$$
 
 This corresponds to the characteristic polynomial:
 
@@ -64,11 +64,11 @@ This maps arbitrary floating-point timestamps onto exact discrete hop indices $k
 
 The 20-bit internal state $s_k$ is decomposed into three overlapping bitfields:
 
-$$t_1 = s_k \mathbin{\&} \text{0x7F} \quad (\text{bits } 0..6)$$
+$$t_1 = s_k \wedge \text{0x7F} \quad (\text{bits } 0..6)$$
 
-$$t_2 = (s_k \gg 7) \mathbin{\&} \text{0x7F} \quad (\text{bits } 7..13)$$
+$$t_2 = (s_k \gg 7) \wedge \text{0x7F} \quad (\text{bits } 7..13)$$
 
-$$t_3 = (s_k \gg 14) \mathbin{\&} \text{0x3F} \quad (\text{bits } 14..19)$$
+$$t_3 = (s_k \gg 14) \wedge \text{0x3F} \quad (\text{bits } 14..19)$$
 
 The output channel index $C(s_k) \in \{0, 1, \dots, 79\}$ is produced by:
 
